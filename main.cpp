@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <thread>
 
 using namespace std;
 
@@ -15,53 +16,60 @@ vector<string> split(const string &);
  */
 
 void matrixRotation(vector<vector<int>> matrix, int r) {
-    
+
     for (int i = 0; i < r; i++){
         int maxRow = matrix.size() - 1;
         int maxCol = matrix[0].size() - 1;
         int row = 0;
         int col = 0;
-
-        int prev = matrix[row][col + 1];
-          
-        for (int i = row; i <= maxRow; i++){
-            int current = matrix[i][col];
-            matrix[i][col] = prev;
-            prev = current;
-            cout << "done" << endl;
-        }
-
-        col++;
-    
-        for (int i = col; i <= maxCol; i++){
-            int current = matrix[maxRow][i];
-            matrix[maxRow][i] = prev;
-            prev = current;
-            cout << "done2" << endl;
-        }
-
-        maxRow--;
-    
-        if(row < maxRow - 1){
-            for (int i = maxRow; i >= row; i--){
-                int current = matrix[i][maxCol];
-                matrix[i][maxCol] = prev;
+        while(row < maxRow && col < maxCol){
+            int prev = matrix[row][col + 1];
+             
+            for (int i = row; i <= maxRow; i++){
+                int current = matrix[i][col];
+                matrix[i][col] = prev;
                 prev = current;
-            cout << "done3" << endl;
+                cout << "done\n";
             }
-
-            maxCol--;
-        }
+    
+            col++;
         
-        if(col < maxCol -1){
-            for (int i = maxCol; i >= col; i--){
+            for (int i = col; i <= maxCol; i++){
                 int current = matrix[maxRow][i];
-                matrix[maxRow][i];
+                matrix[maxRow][i] = prev;
                 prev = current;
-                cout << "done4" << endl;
+                cout << "done2\n";
             }
-
+    
             row++;
+        
+            if(row <= maxRow - 1){
+                for (int i = maxRow; i >= row; i--){
+                    int current = matrix[i][maxCol];
+                    matrix[i][maxCol] = prev;
+                    prev = current;
+                    cout << "done3\n";
+                }
+    
+                maxRow--;
+            }
+            
+            if(col <= maxCol - 1){
+                for (int i = maxCol; i >= col; i--){
+                    int current = matrix[maxRow][i];
+                    matrix[maxRow][i] = prev;
+                    prev = current;
+                    cout << "done4" << endl;
+                }
+    
+                maxCol--;
+            }
+        }
+        for(int i = 0; i < matrix.size(); i++){
+            for (int j = 0; j < matrix.size(); j++){
+                cout << matrix[i][j];
+            }
+            cout << "\n";
         }
     }
 }
