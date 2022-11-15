@@ -15,131 +15,134 @@ vector<string> split(const string &);
  */
 
 void matrixRotation(vector<vector<int>> matrix, int r) {
-    for (int y = 0; y < r; y++){
-        int maxRow = matrix.size() - 1;
-        int maxCol = matrix[0].size() - 1;
-        int row = 0;
-        int col = 0;
- 
-  
-        while (row < maxRow && col < maxCol){
-            int prev = matrix[row][col + 1];
-            for (int i = row; i <= maxRow; i++){
-                int current = matrix[i][col];
-                matrix[i][col] = prev;
-                prev = current;
-            }
 
-            col++;
+  if (!(r % (2 * (matric.size() + matrix[0].size() == 0)))){
+     
+  } 
+  for (int y = 0; y < num; y++){
+    int maxRow = matrix.size() - 1;
+    int maxCol = matrix[0].size() - 1;
+    int row = 0;
+    int col = 0;
 
-            for (int i = col; i <= maxCol; i++){
-                int current = matrix[maxRow][i];
-                matrix[maxRow][i] = prev;
-                prev = current;
+    while (row < maxRow && col < maxCol){
+      int prev = matrix[row][col + 1];
+      for (int i = row; i <= maxRow; i++){
+        int current = matrix[i][col];
+        matrix[i][col] = prev;
+        prev = current;
+      }
 
-            }
+      col++;
 
-            maxRow--;
+      for (int i = col; i <= maxCol; i++){
+        int current = matrix[maxRow][i];
+        matrix[maxRow][i] = prev;
+        prev = current;
 
-            if(row <= maxRow){
-                for (int i = maxRow; i >= row; i--){
-                    int current = matrix[i][maxCol];
-                    matrix[i][maxCol] = prev;
-                    prev = current;
-                }
+      }
 
-                maxCol--;
-            }
+      maxRow--;
 
-            if(col <= maxCol){
-                for (int i = maxCol; i >= col; i--){
-                    int current = matrix[row][i];
-                    matrix[row][i] = prev;
-                    prev = current;
-                }   
-
-                row++;
-            }
-        }    
-    }
-    for(unsigned long int i = 0; i < matrix.size(); i++){
-        for (unsigned long int j = 0; j < matrix[0].size(); j++){
-            cout << matrix[i][j] << " ";
+      if(row <= maxRow){
+        for (int i = maxRow; i >= row; i--){
+          int current = matrix[i][maxCol];
+          matrix[i][maxCol] = prev;
+          prev = current;
         }
-        cout << "\n";
+
+        maxCol--;
+      }
+
+      if(col <= maxCol){
+        for (int i = maxCol; i >= col; i--){
+          int current = matrix[row][i];
+          matrix[row][i] = prev;
+          prev = current;
+        }   
+
+        row++;
+      }
+    }    
+  }
+  for(unsigned long int i = 0; i < matrix.size(); i++){
+    for (unsigned long int j = 0; j < matrix[0].size(); j++){
+      cout << matrix[i][j] << " ";
     }
+    cout << "\n";
+  }
 }
 
 int main()
 {
-    string first_multiple_input_temp;
-    getline(cin, first_multiple_input_temp);
+  string first_multiple_input_temp;
+  getline(cin, first_multiple_input_temp);
 
-    vector<string> first_multiple_input = split(rtrim(first_multiple_input_temp));
+  vector<string> first_multiple_input = split(rtrim(first_multiple_input_temp));
 
-    int m = stoi(first_multiple_input[0]);
+  int m = stoi(first_multiple_input[0]);
 
-    int n = stoi(first_multiple_input[1]);
+  int n = stoi(first_multiple_input[1]);
 
-    int r = stoi(first_multiple_input[2]);
+  int r = stoi(first_multiple_input[2]);
 
-    vector<vector<int>> matrix(m);
+  vector<vector<int>> matrix(m);
 
-    for (int i = 0; i < m; i++) {
-        matrix[i].resize(n);
+  for (int i = 0; i < m; i++) {
+    matrix[i].resize(n);
 
-        string matrix_row_temp_temp;
-        getline(cin, matrix_row_temp_temp);
+    string matrix_row_temp_temp;
+    getline(cin, matrix_row_temp_temp);
 
-        vector<string> matrix_row_temp = split(rtrim(matrix_row_temp_temp));
+    vector<string> matrix_row_temp = split(rtrim(matrix_row_temp_temp));
 
-        for (int j = 0; j < n; j++) {
-            int matrix_row_item = stoi(matrix_row_temp[j]);
+    for (int j = 0; j < n; j++) {
+      int matrix_row_item = stoi(matrix_row_temp[j]);
 
-            matrix[i][j] = matrix_row_item;
-        }
+      matrix[i][j] = matrix_row_item;
     }
+  }
 
-    matrixRotation(matrix, r);
+  matrixRotation(matrix, r);
 
-    return 0;
+  return 0;
 }
 
 string ltrim(const string &str) {
-    string s(str);
+  string s(str);
 
-    s.erase(
-        s.begin(),
-        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
-    );
+  s.erase(
+      s.begin(),
+      find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+      );
 
-    return s;
+  return s;
 }
 
 string rtrim(const string &str) {
-    string s(str);
+  string s(str);
 
-    s.erase(
-        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
-        s.end()
-    );
+  s.erase(
+      find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+      s.end()
+      );
 
-    return s;
+  return s;
 }
 
 vector<string> split(const string &str) {
-    vector<string> tokens;
+  vector<string> tokens;
 
-    string::size_type start = 0;
-    string::size_type end = 0;
+  string::size_type start = 0;
+  string::size_type end = 0;
 
-    while ((end = str.find(" ", start)) != string::npos) {
-        tokens.push_back(str.substr(start, end - start));
+  while ((end = str.find(" ", start)) != string::npos) {
+    tokens.push_back(str.substr(start, end - start));
 
-        start = end + 1;
-    }
+    start = end + 1;
+  }
 
-    tokens.push_back(str.substr(start));
+  tokens.push_back(str.substr(start));
 
-    return tokens;
+  return tokens;
 }
