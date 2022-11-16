@@ -15,10 +15,10 @@ vector<string> split(const string &);
  */
 
 void matrixRotation(vector<vector<int>> matrix, int r) {
-
-  if (!(r % (2 * (matric.size() + matrix[0].size() == 0)))){
-     
-  } 
+  int num = 0;
+  if (!(r % (2 * (matrix.size() + matrix[0].size()) - 4) == 0)){
+    num = r % (2 * (matrix.size() + matrix[0].size()) - 4);
+  }
   for (int y = 0; y < num; y++){
     int maxRow = matrix.size() - 1;
     int maxCol = matrix[0].size() - 1;
