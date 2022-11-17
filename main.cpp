@@ -15,17 +15,17 @@ vector<string> split(const string &);
  */
 
 void matrixRotation(vector<vector<int>> matrix, int r) {
-  int num = 0;
-  if (!(r % (2 * (matrix.size() + matrix[0].size()) - 4) == 0)){
-    num = r % (2 * (matrix.size() + matrix[0].size()) - 4);
-  }
-  for (int y = 0; y < num; y++){
-    int maxRow = matrix.size() - 1;
-    int maxCol = matrix[0].size() - 1;
-    int row = 0;
-    int col = 0;
+  int maxRow = matrix.size() - 1;
+  int maxCol = matrix[0].size() - 1;
+  int row = 0;
+  int col = 0;
+  
+  while (row < maxRow && col < maxCol){
+    int num = r % (2 * (maxRow + maxCol + 2) - 4);
 
-    while (row < maxRow && col < maxCol){
+    for (int y = 0; y < num; y++){
+
+
       int prev = matrix[row][col + 1];
       for (int i = row; i <= maxRow; i++){
         int current = matrix[i][col];
@@ -33,37 +33,41 @@ void matrixRotation(vector<vector<int>> matrix, int r) {
         prev = current;
       }
 
-      col++;
+      
 
-      for (int i = col; i <= maxCol; i++){
+      for (int i = col + 1; i <= maxCol; i++){
         int current = matrix[maxRow][i];
         matrix[maxRow][i] = prev;
         prev = current;
 
       }
 
-      maxRow--;
+      
 
-      if(row <= maxRow){
-        for (int i = maxRow; i >= row; i--){
+      if(row <= maxRow - 1){
+        for (int i = maxRow - 1; i >= row; i--){
           int current = matrix[i][maxCol];
           matrix[i][maxCol] = prev;
           prev = current;
         }
 
-        maxCol--;
+        
       }
 
-      if(col <= maxCol){
-        for (int i = maxCol; i >= col; i--){
+      if(col <= maxCol - 1){
+        for (int i = maxCol - 1; i >= col; i--){
           int current = matrix[row][i];
           matrix[row][i] = prev;
           prev = current;
         }   
 
-        row++;
+        
       }
-    }    
+    }  
+      col++;
+      maxRow--;
+      maxCol--;
+      row++;
   }
   for(unsigned long int i = 0; i < matrix.size(); i++){
     for (unsigned long int j = 0; j < matrix[0].size(); j++){
